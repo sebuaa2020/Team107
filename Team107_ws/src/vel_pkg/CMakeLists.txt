@@ -10,6 +10,10 @@ project(vel_pkg)
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   roscpp
+  move_base_msgs
+  actionlib
+  actionlib_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -71,7 +75,6 @@ find_package(catkin REQUIRED COMPONENTS
 #   DEPENDENCIES
 #   gepmetry_msgs
 # )
-
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
@@ -102,10 +105,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-   INCLUDE_DIRS include
+#  INCLUDE_DIRS include
 #  LIBRARIES vel_pkg
 #  CATKIN_DEPENDS gepmetry_msgs roscpp
-#  DEPENDS system_lib
+   DEPENDS actionlib_msgs
 )
 
 ###########
@@ -228,3 +231,8 @@ add_executable(exceptionHandler
                src/exceptionHandler.cpp
 )
 target_link_libraries(exceptionHandler ${catkin_LIBRARIES})
+
+add_executable(navigation src/navigation_interface.cpp)
+target_link_libraries(navigation
+   ${catkin_LIBRARIES}
+ )

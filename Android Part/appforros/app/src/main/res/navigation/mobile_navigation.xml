@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_login">
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.appforros.ui.login.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_robot"
+        android:name="com.example.appforros.ui.robot.RobotFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_robot" />
+
+    <fragment
+        android:id="@+id/nav_control"
+        android:name="com.example.appforros.ui.control.ControlFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_control" />
+
+    <fragment
+        android:id="@+id/nav_plan"
+        android:name="com.example.appforros.ui.plan.PlanFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_plan" />
+
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.example.appforros.ui.chat.ChatFragment"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_chat" />
+
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.example.appforros.ui.help.HelpFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_help" />
+
+    <fragment
+        android:id="@+id/nav_developer"
+        android:name="com.example.appforros.ui.developer.DeveloperFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_developer" />
+</navigation>

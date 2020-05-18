@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <SurfaceView
+        android:id="@+id/mSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="显示摄像头画面"
+        android:visibility="invisible" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="前 进"/>
+
+        <Button
+            android:id="@+id/backoff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forward"
+            android:layout_centerHorizontal="true"
+            android:text="后 退"/>
+
+        <Button
+            android:id="@+id/turn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forward"
+            android:layout_toLeftOf="@+id/backoff"
+            android:text="左 转"/>
+
+        <Button
+            android:id="@+id/turn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forward"
+            android:layout_toRightOf="@+id/backoff"
+            android:text="右 转"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

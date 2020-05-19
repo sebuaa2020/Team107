@@ -1,8 +1,3 @@
-/*
- *  Created on: Aug 10, 2016
- *      Author: unicorn
- */
-
 #include <ros/ros.h>
 #include <iostream>
 #include <move_base_msgs/MoveBaseAction.h>

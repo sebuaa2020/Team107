@@ -4,6 +4,7 @@
  */
 
 #include <ros/ros.h>
+#include <iostream>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
 /*move_base_msgs::MoveBaseAction
@@ -22,8 +23,10 @@ ROS_INFO("Connected to move base server");
 move_base_msgs::MoveBaseGoal goal;
 goal.target_pose.header.frame_id = "map";
 goal.target_pose.header.stamp = ros::Time::now(); //设置导航点
-goal.target_pose.pose.position.x = 21.174;
-goal.target_pose.pose.position.y = 10.876;
+double x,y;
+std::cin >> x >> y;
+goal.target_pose.pose.position.x = x;
+goal.target_pose.pose.position.y = y;
 goal.target_pose.pose.orientation.w = 1;
 ROS_INFO("Sending goal");
 ac.sendGoal(goal);

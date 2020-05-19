@@ -1,2 +1,0 @@
-navigation_sim_demo:robot_mrobot/mrobot_bringup:robot_mrobot/mrobot_description:robot_mrobot/mrobot_gazebo:robot_mrobot/mrobot_navigation:robot_mrobot/mrobot_teleop:robot_sim_demo:slam_sim_demo:vel_pkg
--DCATKIN_DEVEL_PREFIX=/home/ialtei/Team107_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ialtei/Team107_ws/install -G Unix Makefiles

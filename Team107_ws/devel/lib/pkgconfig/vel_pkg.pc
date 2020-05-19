@@ -1,8 +1,0 @@
-prefix=/home/ialtei/Team107_ws/devel
-
-Name: vel_pkg
-Description: Description of vel_pkg
-Version: 0.0.0
-Cflags: -I/home/ialtei/Team107_ws/src/vel_pkg/include
-Libs: -L${prefix}/lib 
-Requires: 

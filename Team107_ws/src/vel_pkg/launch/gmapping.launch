@@ -1,0 +1,7 @@
+<launch>
+  <include file="$(find vel_pkg)/launch/include/robot_gmapping.launch.xml"/>
+
+  <!-- Move base -->
+ <include file="$(find vel_pkg)/launch/include/move_base.launch.xml"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find vel_pkg)/rviz/slam.rviz"/>
+</launch>

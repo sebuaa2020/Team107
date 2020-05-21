@@ -1,1 +1,2 @@
-rosrun robot_sim_demo robot_keyboard_teleop.py
+#!/bin/bash
+rosrun vel_pkg robot_keyboard_teleop.py

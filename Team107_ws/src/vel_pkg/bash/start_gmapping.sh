@@ -1,3 +1,3 @@
 #!/bin/bash
-roslaunch vel_pkg start_gmapping
+roslaunch vel_pkg gmapping.launch
 

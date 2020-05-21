@@ -43,7 +43,7 @@ int main(int argc, char** argv)
     ros::init(argc,argv,"exceptionHandler");
     
     ROS_INFO("exceptionHandler start!");
-
+    // 暂时未写具体异常处理
     int flag;
     std::cin >> flag;
 

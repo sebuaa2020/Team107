@@ -46,15 +46,20 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
             public void onClick(View v) {
                 //Snackbar.make(v, "删除:" + position, Snackbar.LENGTH_SHORT).show();
                 removeData(position, v);
-                System.out.println("************");
+
             }
         });
         holder.robot_connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 robotList.setChosed_id(robot.getRobot_id());
-                System.out.println(robot.getRobot_id());
-                Snackbar.make(v, "连接到:" + robot.getForm_ip(), Snackbar.LENGTH_SHORT).show();
+
+                if (robot.sendHello() == true) {
+                    Snackbar.make(v, "连接到:" + robot.getForm_ip(), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Snackbar.make(v, "连接到失败", Snackbar.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

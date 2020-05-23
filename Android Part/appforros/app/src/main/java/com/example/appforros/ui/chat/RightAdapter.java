@@ -66,13 +66,13 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
             robot.move("forward");
             holder.left_chat.setText("收到指令，机器人前进");
         } else if (Arrays.asList(back).contains(command)) {
-            robot.move("backoff");
+            robot.move("back");
             holder.left_chat.setText("收到指令，机器人后退");
         } else if (Arrays.asList(left).contains(command)) {
-            robot.move("turnleft");
+            robot.move("left");
             holder.left_chat.setText("收到指令，机器人左转");
         } else if (Arrays.asList(right).contains(command)) {
-            robot.move("turnright");
+            robot.move("right");
             holder.left_chat.setText("收到指令，机器人右转");
         } else {
             holder.left_chat.setText("错误指令");

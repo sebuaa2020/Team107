@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.appforros.R;
+import com.example.appforros.Robot;
 import com.example.appforros.RobotList;
 import com.example.appforros.ui.control.camera.CameraSurfaceHolder;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,6 +28,7 @@ public class ControlFragment extends Fragment {
     private Button turnleft;
     private Button turnright;
     private int chosed_id = -1;
+    private Robot robot = null;
 
     CameraSurfaceHolder mCameraSurfaceHolder = new CameraSurfaceHolder();
 
@@ -39,6 +41,9 @@ public class ControlFragment extends Fragment {
         turnright = root.findViewById(R.id.turn_right);
         mSurfaceView = root.findViewById(R.id.mSurfaceView);
         chosed_id = robotList.getChosed_id();
+        if (chosed_id != -1) {
+            robot = robotList.getChosed_robot();
+        }
 
         if (checkCameraHardware(root.getContext())) {
             mCameraSurfaceHolder.setCameraSurfaceHolder(root.getContext(), mSurfaceView);
@@ -52,32 +57,56 @@ public class ControlFragment extends Fragment {
         forward.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Snackbar.make(v,"机器人" + chosed_id + "发送前进指令", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (chosed_id != -1) {
+                    robot.move("forward");
+                    Snackbar.make(v,"机器人" + chosed_id + "发送前进指令", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(v,"请连接机器人", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
 
         backoff.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "机器人" + chosed_id + "发送后退指令", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (chosed_id != -1) {
+                    robot.move("back");
+                    Snackbar.make(v,"机器人" + chosed_id + "发送后退指令", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(v,"请连接机器人", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
 
         turnleft.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "机器人" + chosed_id + "发送左转指令", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (chosed_id != -1) {
+                    robot.move("left");
+                    Snackbar.make(v,"机器人" + chosed_id + "发送左转指令", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(v,"请连接机器人", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
 
         turnright.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "机器人" + chosed_id + "发送右转指令", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if (chosed_id != -1) {
+                    robot.move("right");
+                    Snackbar.make(v,"机器人" + chosed_id + "发送右转指令", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(v,"请连接机器人", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
     }

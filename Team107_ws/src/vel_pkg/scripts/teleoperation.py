@@ -19,10 +19,8 @@ key_list = []
 def on_message(ws, message):
     #print(ws)
     jsonObj = json.loads(message)
-    if jsonObj['direction'] == 'Forward':
-        key_list.append('i')
-    
-
+    if jsonObj['type'] == 'Direction':
+        key_list.append(jsonObj['direction'])
 
 def on_error(ws, error):
     #print(ws)
@@ -44,27 +42,14 @@ thread.start_new_thread(ws.run_forever, ())
 
 
 msg = """
-Control The Robot!
----------------------------
-Moving around:
-   u    i    o
-   j    k    l
-   m    ,    .
-
-q/z : increase/decrease max speeds by 10%
-w/x : increase/decrease only linear speed by 10%
-e/c : increase/decrease only angular speed by 10%
-space key, k : force stop
-anything else : stop smoothly
-
-CTRL-C to quit
+Remote Control The Robot!
 """
 
 moveBindings = {
-        'i':(1,0),
+        'Forward':(1,0),
         'o':(1,-1),
-        'j':(0,1),
-        'l':(0,-1),
+        'Left':(0,1),
+        'Right':(0,-1),
         'u':(1,1),
         ',':(-1,0),
         '.':(-1,1),
@@ -127,7 +112,7 @@ if __name__=="__main__":
                 if (status == 14):
                     print msg
                 status = (status + 1) % 15
-            elif key == ' ' or key == 'k' :
+            elif key == ' ' or key == 'Stop' :
                 x = 0
                 th = 0
                 control_speed = 0

@@ -1,3 +1,4 @@
 /Team107_ws/devel
 /Team107_ws/build
-
+/Team107_ws/.vscode
+/Team107_ws/.catkin_workspace

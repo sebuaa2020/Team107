@@ -4,6 +4,44 @@ import rospy
 from geometry_msgs.msg import Twist
 
 import sys, select, termios, tty
+import websocket
+import json
+
+try:
+    import thread
+except ImportError:
+    import _thread as thread
+
+
+
+key_list = []
+
+def on_message(ws, message):
+    #print(ws)
+    jsonObj = json.loads(message)
+    if jsonObj['direction'] == 'Forward':
+        key_list.append('i')
+    
+
+
+def on_error(ws, error):
+    #print(ws)
+    print(error)
+
+
+def on_close(ws):
+    #print(ws)
+    print("### closed ###")
+
+
+ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/2",
+                            on_message=on_message,
+                            on_error=on_error,
+                            on_close=on_close)
+
+
+thread.start_new_thread(ws.run_forever, ())
+
 
 msg = """
 Control The Robot!
@@ -43,14 +81,11 @@ speedBindings={
           }
 
 def getKey():
-    tty.setraw(sys.stdin.fileno())
-    rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
-    if rlist:
-        key = sys.stdin.read(1)
-    else:
+    if len(key_list) == 0:
         key = ''
-
-    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+    else:
+        key = key_list.pop()
+        print("MOVE!")
     return key
 
 speed = .2
@@ -99,7 +134,7 @@ if __name__=="__main__":
                 control_turn = 0
             else:
                 count = count + 1
-                if count > 4:
+                if count > 10000:
                     x = 0
                     th = 0
                 if (key == '\x03'):
@@ -132,7 +167,7 @@ if __name__=="__main__":
             #print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
 
     except:
-        print e
+        print "exception!"
 
     finally:
         twist = Twist()

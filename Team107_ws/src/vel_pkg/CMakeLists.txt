@@ -236,3 +236,8 @@ add_executable(navigation src/navigation_interface.cpp)
 target_link_libraries(navigation
    ${catkin_LIBRARIES}
  )
+
+add_executable(controller src/MainController.cpp)
+target_link_libraries(controller
+   ${catkin_LIBRARIES}
+ )

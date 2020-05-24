@@ -128,8 +128,8 @@ if __name__=="__main__":
             pub.publish(twist)
 
             #print("loop: {0}".format(count))
-            #print("target: vx: {0}, wz: {1}".format(target_speed, target_turn))
-            #print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
+            print("target: vx: {0}, wz: {1}".format(target_speed, target_turn))
+            print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
 
     except:
         print e

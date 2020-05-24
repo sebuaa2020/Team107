@@ -19,7 +19,7 @@ public class Robot {
     private long robot_ip;
     private String form_ip;
     private Socket socket;
-    private String uri = "ws://134.175.14.15：8080/demo/websocket/1";
+    private String uri = "ws://134.175.14.15:8080/demo/websocket/1";
     private String recvMsg = null;
     private WebClient webClient;
     private Context context;
@@ -34,6 +34,7 @@ public class Robot {
         this.robot_ip = robot_ip;
         this.context = context;
         try {
+            System.out.println("opentest");
             webClient = new WebClient(new URI(uri), context);
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -125,6 +126,7 @@ public class Robot {
 
     private void sendMessage(String Msg) {
         webClient.send(Msg);
+        System.out.println("send" + Msg);
     }
 
 }

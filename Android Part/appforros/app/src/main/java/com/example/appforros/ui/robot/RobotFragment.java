@@ -1,5 +1,9 @@
 package com.example.appforros.ui.robot;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appforros.R;
 import com.example.appforros.Robot;
 import com.example.appforros.RobotList;
+import com.example.appforros.ui.plan.PlanFragment;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -42,7 +47,7 @@ public class RobotFragment extends Fragment {
         mRecyclerView = root.findViewById(R.id.recyclerview);
         robot_id = root.findViewById(R.id.robot_id);
         robot_ip = root.findViewById(R.id.robot_ip);
-
+        doRegisterReceiver();
 
         initRecycle();
         iv_add.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +58,7 @@ public class RobotFragment extends Fragment {
                     Snackbar.make(v, "请输入正确ip地址" + ip_true, Snackbar.LENGTH_SHORT).show();
                     robot_ip.setText("");
                 } else {
-                    Robot robot = new Robot(++bigest_id,ip_true, robot_ip.getText().toString());
+                    Robot robot = new Robot(++bigest_id,ip_true, robot_ip.getText().toString(), root.getContext());
                     robotList.addRobot(robot);
                     adapter.addData(robotList.size()/*, ip_true, robot_ip.getText().toString()*/);
                     robot_ip.setText("");
@@ -97,5 +102,25 @@ public class RobotFragment extends Fragment {
         //Snackbar.make(root, ip_part[0] + "   " + ip_part[1] + "   " + ip_part[2] + "   " + ip_part[3], Snackbar.LENGTH_SHORT).show();
         //Snackbar.make(root, ip_true + "   ", Snackbar.LENGTH_LONG).show();
         return ip_true;
+    }
+
+    private class ChatMessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message=intent.getStringExtra("message");
+            System.out.println(message);
+            System.out.println("+++++++++++++++++++++++");
+        }
+    }
+
+
+    /**
+     * 动态注册广播
+     */
+    private void doRegisterReceiver() {
+        ChatMessageReceiver chatMessageReceiver = new ChatMessageReceiver();
+        IntentFilter filter = new IntentFilter("com.xch.servicecallback.content");
+        root.getContext().registerReceiver(chatMessageReceiver, filter);
     }
 }

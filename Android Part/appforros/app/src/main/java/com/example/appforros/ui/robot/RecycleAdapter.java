@@ -72,7 +72,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         /*list.add( "机器人" + position + "\t ip:" + ip_form);
         this.ip = ip;
         this.ip_form = ip_form;*/
-        System.out.println(position);
+        //System.out.println(position);
         notifyItemInserted(position);
     }
 

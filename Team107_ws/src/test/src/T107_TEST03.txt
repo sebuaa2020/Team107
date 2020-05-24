@@ -1,0 +1,13 @@
+建图测试
+
+使用的环境为 robot_sim_demo 中的 software_museum
+
+测试过程： 
+运行gazebo 节点
+运行robot_keyboard_teleop 节点
+手动控制移动
+保存地图
+
+测试结果：
+两个地图文件*.yaml与*.pgm，并已经保存到vel_pkg/map文件夹下。
+生成的地图形成闭合空间，没有大块的未成功建立的区域。对比pgm图像与实际地图应该相吻合。

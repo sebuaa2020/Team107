@@ -1,0 +1,46 @@
+测试准备：
+运行gazebo 节点
+运行robot_keyboard_teleop 节点
+
+
+测试项        测试内容               机器人延迟                     测试结果
+  1          向前运动                 0.23                         正常
+  2          向后运动                 0.21                         正常
+  3          左转                    0.18                         正常
+  4          右转                    0.19                         正常
+  5          向前右转                 0.24                         正常
+  6          向前左转                 0.22                         正常
+  7          向后左转                 0.20                         正常
+  8          右后右转                 0.21                         正常
+
+
+  9          停止指令                 0.15                         正常
+  10         缓慢停止                   /                          正常
+  11         修改最大速度                /                          正常
+
+
+白盒测试覆盖说明：
+   在分支上输出标签，如果有输出则表示在测试中该条分支经过测试
+
+结果说明：除了抛出异常的分支没有测试到，其他全部至少测试到一次
+
+if_9_test_ok
+while_test_ok
+get_key_test_ok
+if_4_test_ok
+if_4-1_test_ok
+if_4-2_test_ok
+if_7_test_ok
+if_1_test_ok
+if_5_test_ok
+if_2_test_ok
+if_2-1_test_ok
+vels_test_ok
+currently:	speed 0.22	turn 1.1 
+vels_test_ok
+currently:	speed 0.2178	turn 0.970299 
+if_3_test_ok
+if_7_test_ok
+if_10_test_ok
+if_6_test_ok
+if_8_test_ok

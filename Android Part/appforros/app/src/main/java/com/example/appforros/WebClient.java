@@ -12,10 +12,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class WebClient extends WebSocketClient{
-    //private final String ACTION_RECEIVE_MESSAGE = "com.jinuo.mhwang.servermanager";
-    //private final String KEY_RECEIVED_DATA = "data";
     private final String MAP_MESSAGE = "map"; //地图信息
-    private final String REPLY_MESSAGE = "replay"; //机器人确认信息
+    private final String REPLY_MESSAGE = "reply"; //机器人确认信息
     private Context mContext;
     /**
      *  路径为ws+服务器地址+服务器端设置的子路径+参数（这里对应服务器端机器编号为参数）

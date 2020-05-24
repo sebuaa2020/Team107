@@ -19,6 +19,7 @@ public class Robot {
     private long robot_ip;
     private String form_ip;
     private Socket socket;
+    private String uri = "ws://134.175.14.15：8080/demo/websocket/1";
     private String recvMsg = null;
     private WebClient webClient;
     private Context context;
@@ -33,7 +34,7 @@ public class Robot {
         this.robot_ip = robot_ip;
         this.context = context;
         try {
-            webClient = new WebClient(new URI(form_ip), context);
+            webClient = new WebClient(new URI(uri), context);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -55,9 +56,6 @@ public class Robot {
      */
     public boolean sendHello() {
         sendMessage("hello");
-        //while (sendMessage("hello") == null) {
-            //等待收到应答确保发送完成
-        //}
         return true;
     }
 
@@ -65,32 +63,27 @@ public class Robot {
      */
     public void move(String direction) {
         sendMessage(direction);
-        //while (sendMessage(direction) == null) {
-            //等待收到应答确保发送完成
-        //}
     }
 
     /**更新地图
      */
     public void refresh_map() {
         sendMessage("refresh map");
+        /**广播功能测试
+
         Intent intent = new Intent();
-        intent.setAction("com");
-        intent.putExtra("message", "test");
+        intent.setAction("map");
+        intent.putExtra("map", "test");
         System.out.println("send");
         context.sendBroadcast(intent);
-        //while (sendMessage("refresh map") == null) {
 
-        //}
+         */
     }
 
     /**发送导航点坐标
      */
     public void send_des(String des) {
         sendMessage(des);
-        //while (sendMessage(des) == null) {
-
-        //}
     }
 
     /*
@@ -131,7 +124,7 @@ public class Robot {
     }*/
 
     private void sendMessage(String Msg) {
-        //webClient.send(Msg);
+        webClient.send(Msg);
     }
 
 }

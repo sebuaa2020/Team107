@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <stdlib.h>
 #include <iostream>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <actionlib/client/simple_action_client.h>
@@ -6,6 +7,7 @@
  move_base在world中的目标
 */ 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>  MoveBaseClient;
+using namespace std;
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "navigation_interface_node");
@@ -22,7 +24,8 @@ int main(int argc, char** argv) {
     goal.target_pose.header.frame_id = "map";
     goal.target_pose.header.stamp = ros::Time::now(); //设置导航点
     double x,y;
-    std::cin >> x >> y;
+    x = strtod(argv[1],NULL);
+    y = strtod(argv[2],NULL);
     goal.target_pose.pose.position.x = x;
     goal.target_pose.pose.position.y = y;
     goal.target_pose.pose.orientation.w = 1;
@@ -32,7 +35,9 @@ int main(int argc, char** argv) {
     // Wait for the action to return
     ac.waitForResult();
     if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
-    ROS_INFO("You have reached the goal!");
+    {   ROS_INFO("You have reached the goal!");
+        return 0;
+    }
     else
     ROS_INFO("The base failed for some reason");
     return 0;

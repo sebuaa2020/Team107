@@ -8,12 +8,12 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.buaa</groupId>
+	<artifactId>robot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>robot</name>
+	<description>BUAA Software engineering robot</description>
 
 	<properties>
 		<java.version>1.8</java.version>

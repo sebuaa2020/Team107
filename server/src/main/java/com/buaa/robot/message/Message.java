@@ -2,8 +2,18 @@ package com.buaa.robot.message;
 import com.google.gson.Gson;
 
 public class Message {
+    /*
+    * android
+    * robot
+    * server
+     */
     private String from;
     private String to;
+
+    /*
+    * direction
+    *
+     */
     private String type;
     private String data;
 

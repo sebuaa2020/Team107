@@ -18,9 +18,10 @@ key_list = []
 
 def on_message(ws, message):
     #print(ws)
+    print("reveive" + message)
     jsonObj = json.loads(message)
-    if jsonObj['type'] == 'Direction':
-        key_list.append(jsonObj['direction'])
+    if jsonObj['type'] == 'direction':
+        key_list.append(jsonObj['data'])
 
 def on_error(ws, error):
     #print(ws)
@@ -46,10 +47,10 @@ Remote Control The Robot!
 """
 
 moveBindings = {
-        'Forward':(1,0),
-        'o':(1,-1),
-        'Left':(0,1),
-        'Right':(0,-1),
+        'forward':(1,0),
+        'back':(1,-1),
+        'left':(0,1),
+        'right':(0,-1),
         'u':(1,1),
         ',':(-1,0),
         '.':(-1,1),

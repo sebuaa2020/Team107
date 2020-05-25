@@ -25,7 +25,7 @@ public class Robot {
     private WebClient webClient;
     private Context context;
     private final String FROM = "android";
-    private final String TO = "server";
+    private final String TO = "robot";
     private final String DIRECTION = "direction";
     private final String REFRESH_MAP = "refresh_map";
     private final String SEND_DES = "send_des";
@@ -135,6 +135,7 @@ public class Robot {
     }*/
 
     private void sendMessage(Message msg) {
+        System.out.println(msg.MessageToJson());
         webClient.send(msg.MessageToJson());
         //System.out.println("send" + Msg.toString());
     }

@@ -12,12 +12,28 @@ public class MessageReceiveHandle {
     public MessageReceiveHandle(){
         addressMap.put("robot",2);
         addressMap.put("android",1);
-
+        addressMap.put("server",0);
     }
     public void messageReceiveHandle(String message) {
-        Message msg = gson.fromJson(message,Message.class);
-        WebSocketServer.sendMessage("i have rcv you message: " + message,
-                addressMap.get(msg.getFrom()));
-        WebSocketServer.sendMessage(message,addressMap.get(msg.getTo()));
+        Message msg = null;
+        try{
+            msg = gson.fromJson(message,Message.class);
+        }catch (Exception e){
+            System.out.println("Not json format");
+            return;
+        }
+
+        try{
+            if (addressMap.get(msg.getFrom()) != 0){
+                WebSocketServer.sendMessage(message, addressMap.get(msg.getFrom()));
+            }
+
+            if (addressMap.get(msg.getTo()) != 0){
+                WebSocketServer.sendMessage(message, addressMap.get(msg.getTo()));
+            }
+        } catch (Exception e){
+            System.out.println("Unknown destination");
+        }
+
     }
 }

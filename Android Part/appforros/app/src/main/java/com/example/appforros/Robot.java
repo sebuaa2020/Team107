@@ -2,6 +2,7 @@ package com.example.appforros;
 
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.mbms.MbmsErrors;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -23,6 +24,11 @@ public class Robot {
     private String recvMsg = null;
     private WebClient webClient;
     private Context context;
+    private final String FROM = "android";
+    private final String TO = "server";
+    private final String DIRECTION = "direction";
+    private final String REFRESH_MAP = "refresh_map";
+    private final String SEND_DES = "send_des";
 
     public Robot() {
 
@@ -56,20 +62,23 @@ public class Robot {
     /**检查连接情况
      */
     public boolean sendHello() {
-        sendMessage("hello");
+        Message msg = new Message(FROM, TO, "hello", "hello");
+        sendMessage(msg);
         return true;
     }
 
     /**方向控制
      */
     public void move(String direction) {
-        sendMessage(direction);
+        Message msg = new Message(FROM, TO, DIRECTION, direction);
+        sendMessage(msg);
     }
 
     /**更新地图
      */
     public void refresh_map() {
-        sendMessage("refresh map");
+        Message msg = new Message(FROM, TO, REFRESH_MAP, REFRESH_MAP);
+        sendMessage(msg);
         /**广播功能测试
 
         Intent intent = new Intent();
@@ -84,7 +93,8 @@ public class Robot {
     /**发送导航点坐标
      */
     public void send_des(String des) {
-        sendMessage(des);
+        Message msg = new Message(FROM, TO, SEND_DES, des);
+        sendMessage(msg);
     }
 
     /*
@@ -124,9 +134,9 @@ public class Robot {
         return recvMsg;
     }*/
 
-    private void sendMessage(String Msg) {
-        webClient.send(Msg);
-        System.out.println("send" + Msg);
+    private void sendMessage(Message msg) {
+        webClient.send(msg.MessageToJson());
+        //System.out.println("send" + Msg.toString());
     }
 
 }

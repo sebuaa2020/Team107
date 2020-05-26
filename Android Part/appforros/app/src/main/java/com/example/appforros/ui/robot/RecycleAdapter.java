@@ -37,9 +37,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        //final Robot robot = robotList.getRobotById(position);
         final Robot robot = robots.get(position);
-        //holder.tv.setText(list.get(position));
         holder.tv.setText("机器人" + position + ":\t" + robot.getForm_ip());
         holder.tv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +50,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
         holder.robot_connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("test");
                 robotList.setChosed_id(robot.getRobot_id());
-
                 if (robot.sendHello() == true) {
                     Snackbar.make(v, "连接到:" + robot.getForm_ip(), Snackbar.LENGTH_SHORT).show();
                 } else {
@@ -69,32 +67,25 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyViewHo
     }
 
     public void addData(int position/*, long ip, String ip_form*/) {
-        /*list.add( "机器人" + position + "\t ip:" + ip_form);
-        this.ip = ip;
-        this.ip_form = ip_form;*/
-        //System.out.println(position);
         notifyItemInserted(position);
     }
 
     public void removeData(int position, View v) {
-        //list.remove(position);
         if (robotList.getChosed_id() == position) {
             robotList.setChosed_id(-1);
         }
         robots.remove(position);
         System.out.println(position);
         notifyItemRemoved(position);
-        //System.out.println(robotList.getRobot_count() + " " + robotList.size());
         notifyDataSetChanged();
-        //System.out.println(robotList.getRobot_count() + " " + robotList.size());
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv, tv_delete, robot_connect;
         public MyViewHolder(View view) {
             super(view);
-            tv = (TextView) view.findViewById(R.id.id_num);
-            tv_delete = (TextView) view.findViewById(R.id.tv_delete);
+            tv = view.findViewById(R.id.id_num);
+            tv_delete = view.findViewById(R.id.tv_delete);
             robot_connect = view.findViewById(R.id.robot_connect);
         }
     }

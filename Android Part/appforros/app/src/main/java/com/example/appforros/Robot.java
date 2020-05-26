@@ -3,6 +3,7 @@ package com.example.appforros;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.mbms.MbmsErrors;
+import android.util.AndroidException;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -25,9 +26,10 @@ public class Robot {
     private WebClient webClient;
     private Context context;
     private final String FROM = "android";
-    private final String TO = "robot";
+    private final String TO = "server";
     private final String DIRECTION = "direction";
     private final String REFRESH_MAP = "refresh_map";
+    private final String ANGLE = "angle";
     private final String SEND_DES = "send_des";
 
     public Robot() {
@@ -40,7 +42,6 @@ public class Robot {
         this.robot_ip = robot_ip;
         this.context = context;
         try {
-            System.out.println("opentest");
             webClient = new WebClient(new URI(uri), context);
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -63,7 +64,9 @@ public class Robot {
      */
     public boolean sendHello() {
         Message msg = new Message(FROM, TO, "hello", "hello");
+        System.out.println("webclient");
         sendMessage(msg);
+        //sendMessage("hello");
         return true;
     }
 
@@ -72,13 +75,19 @@ public class Robot {
     public void move(String direction) {
         Message msg = new Message(FROM, TO, DIRECTION, direction);
         sendMessage(msg);
+        //sendMessage(direction);
+    }
+
+    public void sendAngle(String angle) {
+        Message msg = new Message(FROM, TO, ANGLE, angle);
+        sendMessage(msg);
     }
 
     /**更新地图
      */
     public void refresh_map() {
         Message msg = new Message(FROM, TO, REFRESH_MAP, REFRESH_MAP);
-        sendMessage(msg);
+        //sendMessage(msg);
         /**广播功能测试
 
         Intent intent = new Intent();
@@ -94,7 +103,7 @@ public class Robot {
      */
     public void send_des(String des) {
         Message msg = new Message(FROM, TO, SEND_DES, des);
-        sendMessage(msg);
+        //sendMessage(msg);
     }
 
     /*
@@ -135,9 +144,12 @@ public class Robot {
     }*/
 
     private void sendMessage(Message msg) {
-        System.out.println(msg.MessageToJson());
         webClient.send(msg.MessageToJson());
         //System.out.println("send" + Msg.toString());
+    }
+
+    private void sendMessage(String msg) {
+        webClient.send(msg);
     }
 
 }

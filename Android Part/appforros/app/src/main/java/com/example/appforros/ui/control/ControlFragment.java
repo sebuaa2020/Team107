@@ -6,6 +6,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class ControlFragment extends Fragment {
     private Button turnright;
     private int chosed_id = -1;
     private Robot robot = null;
+    private double velocity = 0.5;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +38,26 @@ public class ControlFragment extends Fragment {
 //        backoff  = root.findViewById(R.id.backoff);
 //        turnleft = root.findViewById(R.id.turn_left);
 //        turnright = root.findViewById(R.id.turn_right);
+        final SeekBar velocitySeekBar = root.findViewById(R.id.velocity);
+        final TextView v_value = root.findViewById(R.id.v_value);
+        velocitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                velocity = progress / 100.0;
+                v_value.setText("当前速度：" + velocity);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
 
         RockerView rockerView = root.findViewById(R.id.rockerView);
         final TextView mLog = root.findViewById(R.id.mLog);
@@ -70,7 +92,7 @@ public class ControlFragment extends Fragment {
 
     private void sendAngle(String angle) {
         if (chosed_id != -1) {
-            robot.sendAngle(angle);
+            robot.sendAngle("[" + angle + "," + velocity  + "]");
         } else {
             Toast.makeText(root.getContext(), "请连接机器人", Toast.LENGTH_SHORT).show();
         }

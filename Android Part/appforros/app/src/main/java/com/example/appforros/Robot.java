@@ -29,7 +29,7 @@ public class Robot {
     private final String TO = "server";
     private final String DIRECTION = "direction";
     private final String REFRESH_MAP = "refresh_map";
-    private final String ANGLE = "angle";
+    private final String ANGLE = "angle_speed";
     private final String SEND_DES = "send_des";
 
     public Robot() {

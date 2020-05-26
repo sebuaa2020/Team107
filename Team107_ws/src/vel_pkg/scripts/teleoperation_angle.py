@@ -22,7 +22,10 @@ def on_message(ws, message):
     print("reveive" + message)
     jsonObj = json.loads(message)
     if jsonObj['type'] == 'angle_speed':
-        key_list.append(jsonObj['data'])
+        key_list.append(jsonObj['data'])        
+    elif jsonObj['type'] == 'stop':
+        key_list.append('stop')
+
 
 def on_error(ws, error):
     #print(ws)
@@ -50,10 +53,11 @@ Remote Control The Robot!
 
 def getKey():
     if len(key_list) == 0:
-        key = ''
+        key = ['']
+    
     else:
         key = key_list.pop()
-        key = key.split(" ")     
+        key = key.split(" ")
     return key
 
 speed = .2
@@ -77,22 +81,28 @@ if __name__=="__main__":
     target_turn = 0
     control_speed = 0
     control_turn = 0
+
+    print(msg)
+    print(vels(speed,turn))
     try:
-        print(msg)
-        print(vels(speed,turn))
         while(1):
 
             key = getKey()
             
-            if key != '':
+            if key[0] == 'stop':
+                x = 0
+                th = 0
+                count = 0
+
+            elif key[0] != '':
                 ang = float(key[0])
                 base = 1
                 if 0 <= ang and ang < 90:
                     base = -1
-                    th = -math.cos(math.radians(ang))
+                    th = math.cos(math.radians(ang))
                 elif 90 <= ang and ang < 180:
                     base = -1
-                    th = -math.cos(math.radians(ang))
+                    th = math.cos(math.radians(ang))
                 elif 180 <= ang and ang < 270:
                     base = 1
                     th = -math.cos(math.radians(ang))
@@ -101,15 +111,7 @@ if __name__=="__main__":
                     th = -math.cos(math.radians(ang))
 
                 x = float(key[1]) * 2 * base
-                
                 count = 0
-            else:
-                count = count + 1
-                if count > 10000:
-                    x = 0
-                    th = 0
-                if (key == '\x03'):
-                    break
 
             target_speed = speed * x
             target_turn = turn * th
@@ -139,7 +141,6 @@ if __name__=="__main__":
             #print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
     except:
         print("exception")
-
     finally:
         twist = Twist()
         twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.kongqw:AndroidRocker:1.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a335c2196460ca1451265415ba1618b/AndroidRocker-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0a335c2196460ca1451265415ba1618b/AndroidRocker-1.0.1/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.kongqw/AndroidRocker/1.0.1/8a53d9c4d2407bb30c9f8caef9ffccce4e48d49/AndroidRocker-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

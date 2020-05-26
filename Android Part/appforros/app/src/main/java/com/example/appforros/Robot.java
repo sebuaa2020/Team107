@@ -31,6 +31,7 @@ public class Robot {
     private final String REFRESH_MAP = "refresh_map";
     private final String ANGLE = "angle_speed";
     private final String SEND_DES = "send_des";
+    private final String SEND_STOP = "stop";
 
     public Robot() {
 
@@ -68,6 +69,11 @@ public class Robot {
         sendMessage(msg);
         //sendMessage("hello");
         return true;
+    }
+
+    public void sendStop() {
+        Message msg = new Message(FROM, TO, SEND_STOP, SEND_STOP);
+        sendMessage(msg);
     }
 
     /**方向控制

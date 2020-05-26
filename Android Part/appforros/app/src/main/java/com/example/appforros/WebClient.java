@@ -43,7 +43,7 @@ public class WebClient extends WebSocketClient{
     @Override
     public void onMessage(String message) {
         showLog("onMessage->"+message);
-        sendMessageBroadcast(message);
+        //sendMessageBroadcast(message);
     }
 
     @Override

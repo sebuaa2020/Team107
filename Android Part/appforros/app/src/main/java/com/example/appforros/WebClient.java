@@ -86,17 +86,20 @@ public class WebClient extends WebSocketClient{
      */
     private void sendMessageBroadcast(String message){
         if (!message.isEmpty()){
+            //System.out.println("webclient");
+            Message msg_as_json = new Message(message);
+            //System.out.println("webclient" + msg_as_json.getType());
             Intent intent = new Intent();
-            if (message == REPLY_MESSAGE) {
+            if (msg_as_json.getType() == REPLY_MESSAGE) {
                 //检查message类型，发送不同广播
                 intent.setAction(REPLY_MESSAGE);
-                intent.putExtra(REPLY_MESSAGE,message);
-            } else if (message == MAP_MESSAGE) {
+                intent.putExtra(REPLY_MESSAGE,msg_as_json.getData());
+            } else if (msg_as_json.getType() == MAP_MESSAGE) {
                 intent.setAction(MAP_MESSAGE);
-                intent.putExtra(MAP_MESSAGE,message);
+                intent.putExtra(MAP_MESSAGE,msg_as_json.getData());
             } else {
                 intent.setAction(REPLY_MESSAGE);
-                intent.putExtra(REPLY_MESSAGE,message);
+                intent.putExtra(REPLY_MESSAGE,msg_as_json.getData());
             }
 
             showLog("发送收到的消息");

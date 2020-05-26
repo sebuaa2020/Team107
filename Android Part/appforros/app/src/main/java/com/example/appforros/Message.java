@@ -2,6 +2,7 @@ package com.example.appforros;
 
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 public class Message {
     private String from;
@@ -14,6 +15,15 @@ public class Message {
         this.to = to;
         this.type = type;
         this.data = data;
+    }
+
+    public Message(String msg) {
+        Gson gson = new Gson();
+        JsonObject obj = gson.fromJson(gson.toJson(this), JsonObject.class);
+        from = obj.get("from").toString();
+        to = obj.get("to").toString();
+        type = obj.get("type").toString();
+        data = obj.get("data").toString();
     }
 
     public String getFrom() {
@@ -34,6 +44,9 @@ public class Message {
 
     public String MessageToJson() {
         Gson gson = new Gson();
+        //JsonObject obj = gson.fromJson(gson.toJson(this), JsonObject.class);
+        //System.out.println(obj.get("from"));
+        //System.out.println(gson.toJson(this));
         return gson.toJson(this);
     }
 

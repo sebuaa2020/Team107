@@ -1,0 +1,38 @@
+﻿TEST106
+总控模块测试
+
+0:  start_robot  //其他指令的先导条件
+1:  keyboard_controll  
+2:  start_navigation 
+3:  set_navi_point
+4:  start_gmapping //需要先keyboard_controll
+5:  save_map  //需要先start_gmapping
+
+
+//启动->启动（测试不会重复启动）->键盘控制->导航服务->设置导航点->错误指令
+start_robot_test
+robot_start
+already start!
+keyboard_controll_test
+key_board_controller ok
+navigation_test
+navi_service_start
+please input where you want to go
+set_navi_point_test
+start_move
+please input right command!
+
+//启动->建图->键盘控制->存图->建图->存图
+start_robot_test
+robot_start
+use gmapping we need keyboard_controller first
+please start gmapping first
+keyboard_controll_test
+key_board_controller ok
+please start gmapping first
+gmapping_test
+gmapping_start,please use keyboard to controll
+save_map_test
+map saved
+
+覆盖了MainContriller中除了抛出异常的所有语句

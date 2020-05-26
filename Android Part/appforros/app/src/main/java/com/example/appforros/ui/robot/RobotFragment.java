@@ -61,8 +61,7 @@ public class RobotFragment extends Fragment {
                     Robot robot = new Robot(++bigest_id,ip_true, robot_ip.getText().toString(), root.getContext());
                     robotList.addRobot(robot);
                     adapter.addData(robotList.size()/*, ip_true, robot_ip.getText().toString()*/);
-                    robot_ip.setText("");
-                    //robot_id.setText("机器人");
+                    robot_ip.setText("134.175.14.15");
                 }
             }
         });

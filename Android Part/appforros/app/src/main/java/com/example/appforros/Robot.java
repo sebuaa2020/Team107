@@ -25,8 +25,8 @@ public class Robot {
     private String recvMsg = null;
     private WebClient webClient;
     private Context context;
-    private final String FROM = "android";
-    private final String TO = "robot";
+    private final String FROM = "1";
+    private final String TO = "0";
     private final String DIRECTION = "direction";
     private final String REFRESH_MAP = "refresh_map";
     private final String ANGLE = "angle_speed";

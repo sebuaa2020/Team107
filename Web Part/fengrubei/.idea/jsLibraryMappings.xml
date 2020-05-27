@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{bootstrap-3.3.4, d3.v3, html5shiv, jquery-1.10.2, respond}" />
+  </component>
+</project>

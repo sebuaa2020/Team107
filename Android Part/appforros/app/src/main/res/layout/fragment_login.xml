@@ -13,7 +13,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:hint="请输入帐号"/>
+        android:hint="请输入帐号(任意整数)"/>
 
     <EditText
         android:id="@+id/user_password"
@@ -22,7 +22,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:hint="请输入密码"/>
+        android:hint="请输入密码(随便输)"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -53,50 +53,5 @@
         android:layout_marginRight="3dp"
         android:text="登 录"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前用户："
-            />
-
-        <TextView
-            android:id="@+id/account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="无"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前用户："
-            />
-
-        <TextView
-            android:id="@+id/priority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="无"
-            />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="权限说明"
-        />
 
 </LinearLayout>

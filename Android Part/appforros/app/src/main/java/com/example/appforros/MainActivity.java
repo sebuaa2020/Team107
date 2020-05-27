@@ -1,5 +1,6 @@
 package com.example.appforros;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.appforros.ui.robot.RecycleAdapter;
@@ -10,48 +11,72 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private RecycleAdapter adapter;
+    private User user = User.getInstance();
+    private EditText user_account;
+    private EditText user_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_login,R.id.nav_robot, R.id.nav_control, R.id.nav_plan,
-                R.id.nav_chat, R.id.nav_help, R.id.nav_developer)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        setContentView(R.layout.fragment_login);
+        Button login_in = findViewById(R.id.login_in_button);
+        TextView register = findViewById(R.id.user_register);
+
+        user_account = findViewById(R.id.user_account);
+        user_password = findViewById(R.id.user_password);
+        user_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "注册", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+        login_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cheekAccount() == -1) {
+                    Snackbar.make(v, "帐号错误: ", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    user.setUser_account(Long.valueOf(cheekAccount()));
+                    user.setUser_priority(2);
+                    user_account.setText("");
+                    user_password.setText("");
+                    Intent intent = new Intent(MainActivity.this, SelectActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+    private long cheekAccount() {
+        long account;
+        try {
+            //System.out.println("account" + user_account.getText().toString());
+            account = Long.parseLong(user_account.getText().toString());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return account;
     }
 }

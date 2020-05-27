@@ -25,8 +25,8 @@ public class Robot {
     private String recvMsg = null;
     private WebClient webClient;
     private Context context;
-    private final String FROM = "1";
-    private final String TO = "0";
+    private final String FROM = "android";
+    private final String TO = "robot";
     private final String DIRECTION = "direction";
     private final String REFRESH_MAP = "refresh_map";
     private final String ANGLE = "angle_speed";
@@ -65,7 +65,7 @@ public class Robot {
      */
     public boolean sendHello() {
         Message msg = new Message(FROM, TO, "hello", "hello");
-        System.out.println("webclient");
+        //System.out.println("webclient");
         sendMessage(msg);
         //sendMessage("hello");
         return true;
@@ -95,13 +95,11 @@ public class Robot {
         Message msg = new Message(FROM, TO, REFRESH_MAP, REFRESH_MAP);
         //sendMessage(msg);
         /**广播功能测试
-
-        Intent intent = new Intent();
-        intent.setAction("map");
-        intent.putExtra("map", "test");
-        System.out.println("send");
-        context.sendBroadcast(intent);
-
+         Intent intent = new Intent();
+         intent.setAction("map");
+         intent.putExtra("map", "test");
+         System.out.println("send");
+         context.sendBroadcast(intent);
          */
     }
 
@@ -114,19 +112,15 @@ public class Robot {
 
     /*
     private String sendMessage (final String Msg){
-
         new Thread(new Runnable() {
-
             @Override
             public void run() {
                 try {
                     socket = new Socket(form_ip, 12574);
-
                     //向服务器发送数据
                     PrintWriter send = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),"utf-8")));
                     send.println(Msg);
                     send.flush();
-
                     //接受服务端数据
                     BufferedReader recv = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     recvMsg = recv.readLine();
@@ -136,7 +130,6 @@ public class Robot {
                     } else {
 //                          mRecvText.setText("Cannot receive data correctly.");
                     }
-
                     send.close();
                     recv.close();
                     socket.close();
@@ -144,7 +137,6 @@ public class Robot {
                     ex.printStackTrace();
                 }
             }
-
         }).start();
         return recvMsg;
     }*/

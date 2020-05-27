@@ -1,20 +1,0 @@
-
-asquid:UselessImportCheck"=Remove this unused import 'com.example.system.vo.LoginlogVo'.(››à™
-?squid:S1148R"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-bsquid:CommentedOutCodeLinev"<This block of commented-out lines of code should be removed.(®ôÛÝ
-@squid:S1481@")Remove this unused "user" local variable.(ó¿Š
-zsquid:UselessImportCheck"QRemove this unused import 'org.springframework.web.bind.annotation.ResponseBody'.(•¶¶êøÿÿÿÿ
-hsquid:UselessImportCheck
-"?Remove this unused import 'com.example.system.entity.Loginlog'.(™¹‰ûÿÿÿÿ
-O
-squid:S1064"9Replace this use of System.out or System.err by a logger.(×ëÊ¢
-?squid:S1148D"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-wsquid:UselessImportCheck"SRemove this unused import 'org.springframework.web.bind.annotation.ResponseStatus'.(¯×ñ
-osquid:UselessImportCheck"FRemove this unused import 'org.springframework.stereotype.Controller'.(øŠ—Öùÿÿÿÿ
-bsquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(‡Øµ¿
-bsquid:CommentedOutCodeLinek"<This block of commented-out lines of code should be removed.(ËÑ£Š
-?squid:S1148s"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-bsquid:S1192+"KDefine a constant instead of duplicating this literal "createtime" 3 times.(÷”æÂ
-_squid:UselessImportCheck";Remove this unused import 'com.example.system.vo.NoticeVo'.(÷Ö
-?squid:S1148`"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-gsquid:CommentedOutCodeLine5"<This block of commented-out lines of code should be removed.(ìÕØœýÿÿÿÿ

@@ -19,6 +19,7 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
     private Context context;
     private List<String> list;
     private String command;
+    //private String[] spped = {"spped", "set speed", "速度", "设置速度", "速度为"}
     private String[] forward = {"forward", "move forward", "前进"};
     private String[] left = {"left", "turn left", "左转"};
     private String[] right = {"right", "turn right", "右转"};

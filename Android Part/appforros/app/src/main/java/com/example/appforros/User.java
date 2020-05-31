@@ -33,4 +33,15 @@ public class User {
         return user_priority;
     }
 
+    public boolean check_priority(String op) {
+        if (op == "move") {
+
+        } else if (op == "plan") {
+
+        } else if (op == "map") {
+
+        }
+        return true;
+    }
+
 }

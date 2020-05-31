@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appforros.R;
 import com.example.appforros.Robot;
 import com.example.appforros.RobotList;
+import com.example.appforros.User;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,7 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
     private String[] back = {"back", "backoff", "move back", "后退"};
     private RobotList robotList = RobotList.getInstance();
     private Robot robot;
+    private User user = User.getInstance();
 
     public RightAdapter(Context context, List<String> list) {
         this.context = context;
@@ -43,11 +45,13 @@ public class RightAdapter extends RecyclerView.Adapter<RightAdapter.RightViewHol
     @Override
     public void onBindViewHolder(RightAdapter.RightViewHolder holder, final int position) {
         holder.right_chat.setText(command);
-        if (robotList.getChosed_id() != -1) {
+        if (robotList.getChosed_id() == -1) {
+            holder.left_chat.setText("请连接机器人");
+        } else if (!user.check_priority("move")){
+            holder.left_chat.setText("权限不足");
+        } else {
             robot = robotList.getChosed_robot();
             checkCommand(holder);
-        } else {
-            holder.left_chat.setText("请连接机器人");
         }
     }
 

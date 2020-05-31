@@ -22,6 +22,7 @@ public class SelectActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private RecycleAdapter adapter;
     private RobotList robotList = RobotList.getInstance();
+    private User user = User.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class SelectActivity extends AppCompatActivity {
             case R.id.map_begin:
                 if (robotList.getChosed_id() == -1) {
                     Toast.makeText(this, "请连接机器人", Toast.LENGTH_SHORT).show();
+                } else if (!user.check_priority("map")) {
+                    Toast.makeText(this, "权限不足", Toast.LENGTH_SHORT).show();
                 } else {
                     Robot robot = robotList.getChosed_robot();
                     robot.map_begin();
@@ -64,6 +67,8 @@ public class SelectActivity extends AppCompatActivity {
             case R.id.map_end:
                 if (robotList.getChosed_id() == -1) {
                     Toast.makeText(this, "请连接机器人", Toast.LENGTH_SHORT).show();
+                } else if (!user.check_priority("map")) {
+                    Toast.makeText(this, "权限不足", Toast.LENGTH_SHORT).show();
                 } else {
                     Robot robot = robotList.getChosed_robot();
                     robot.map_end();

@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.appforros.R;
 import com.example.appforros.Robot;
 import com.example.appforros.RobotList;
+import com.example.appforros.User;
 import com.google.android.material.snackbar.Snackbar;
 
 public class PlanFragment extends Fragment {
@@ -31,6 +32,7 @@ public class PlanFragment extends Fragment {
     private RobotList robotList = RobotList.getInstance();
     private ImageView map_view;
     private final String MAP_MESSAGE = "map";
+    private User user = User.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,11 +51,13 @@ public class PlanFragment extends Fragment {
         refresh_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (robot != null) {
+                if (robotList.getChosed_id() == -1) {
+                    Snackbar.make(v, "请连接机器人", Snackbar.LENGTH_SHORT).show();
+                } else if (!user.check_priority("plan")){
+                    Snackbar.make(v, "权限不足", Snackbar.LENGTH_SHORT).show();
+                } else {
                     robot.refresh_map();
                     Snackbar.make(v, "更新地图", Snackbar.LENGTH_SHORT).show();
-                } else {
-                    Snackbar.make(v, "请连接机器人", Snackbar.LENGTH_SHORT).show();
                 }
 
             }
@@ -64,15 +68,17 @@ public class PlanFragment extends Fragment {
             public void onClick(View v) {
                 String des = destination.getText().toString();
                 destination.setText("");
-                if (robot != null) {
+                if (robotList.getChosed_id() == -1) {
+                    Snackbar.make(v, "请连接机器人", Snackbar.LENGTH_SHORT).show();
+                } else if (!user.check_priority("plan")) {
+                    Snackbar.make(v, "权限不足", Snackbar.LENGTH_SHORT).show();
+                } else {
                     if (checkDes(des)) {
                         robot.send_des(des);
                         Snackbar.make(v, "发送地址", Snackbar.LENGTH_SHORT).show();
                     } else {
                         Snackbar.make(v, "地址错误", Snackbar.LENGTH_SHORT).show();
                     }
-                } else {
-                    Snackbar.make(v, "请连接机器人", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });

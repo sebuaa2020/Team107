@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="当前用户："
+            android:text="当前帐号："
             />
 
         <TextView
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="当前用户："
+            android:text="当前权限："
             />
 
         <TextView

@@ -50,4 +50,12 @@
         />
 
 
+    <Button
+        android:id="@+id/login_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退出当前帐号"
+        />
+
+
 </LinearLayout>

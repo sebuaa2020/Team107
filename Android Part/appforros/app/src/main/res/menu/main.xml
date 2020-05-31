@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/map_begin"
         android:orderInCategory="100"
-        android:title="建图"
+        android:title="开始建图"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/map_end"
+        android:orderInCategory="100"
+        android:title="停止建图"
         app:showAsAction="never" />
 </menu>

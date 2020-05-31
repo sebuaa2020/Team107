@@ -28,7 +28,9 @@ public class Robot {
     private final String FROM = "android";
     private final String TO = "robot";
     private final String DIRECTION = "direction";
-    private final String REFRESH_MAP = "refresh_map";
+    private final String MAP_BEGIN = "map_begin";
+    private final String MAP_END =  "map_end";
+    private final String MAP_REFRESH = "map_refresh";
     private final String ANGLE = "angle_speed";
     private final String SEND_DES = "send_des";
     private final String SEND_STOP = "stop";
@@ -89,11 +91,21 @@ public class Robot {
         sendMessage(msg);
     }
 
+    public void map_begin() {
+        Message msg = new Message(FROM, TO, MAP_BEGIN, MAP_BEGIN);
+        sendMessage(msg);
+    }
+
+    public void map_end() {
+        Message msg = new Message(FROM, TO, MAP_END, MAP_END);
+        sendMessage(msg);
+    }
+
     /**更新地图
      */
     public void refresh_map() {
-        Message msg = new Message(FROM, TO, REFRESH_MAP, REFRESH_MAP);
-        //sendMessage(msg);
+        Message msg = new Message(FROM, TO, MAP_REFRESH, MAP_REFRESH);
+        sendMessage(msg);
         /**广播功能测试
          Intent intent = new Intent();
          intent.setAction("map");
@@ -107,7 +119,7 @@ public class Robot {
      */
     public void send_des(String des) {
         Message msg = new Message(FROM, TO, SEND_DES, des);
-        //sendMessage(msg);
+        sendMessage(msg);
     }
 
     /*

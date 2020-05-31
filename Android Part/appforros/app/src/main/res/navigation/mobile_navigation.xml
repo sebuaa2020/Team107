@@ -5,12 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_robot">
 
-<!--    <fragment-->
-<!--        android:id="@+id/nav_login"-->
-<!--        android:name="com.example.appforros.ui.login.LoginFragment"-->
-<!--        android:label="@string/menu_login"-->
-<!--        tools:layout="@layout/fragment_login" />-->
-
     <fragment
         android:id="@+id/nav_user"
         android:name="com.example.appforros.ui.user.UserFragment"
@@ -41,15 +35,4 @@
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_chat" />
 
-    <fragment
-        android:id="@+id/nav_help"
-        android:name="com.example.appforros.ui.help.HelpFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_help" />
-
-    <fragment
-        android:id="@+id/nav_developer"
-        android:name="com.example.appforros.ui.developer.DeveloperFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_developer" />
 </navigation>

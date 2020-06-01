@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -108,8 +109,7 @@ public class RobotFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String message=intent.getStringExtra("message");
-            System.out.println(message);
-            System.out.println("+++++++++++++++++++++++");
+            //Toast.makeText(root.getContext(), "权限不足", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -119,7 +119,7 @@ public class RobotFragment extends Fragment {
      */
     private void doRegisterReceiver() {
         ChatMessageReceiver chatMessageReceiver = new ChatMessageReceiver();
-        IntentFilter filter = new IntentFilter("com.xch.servicecallback.content");
+        IntentFilter filter = new IntentFilter("hello");
         root.getContext().registerReceiver(chatMessageReceiver, filter);
     }
 }

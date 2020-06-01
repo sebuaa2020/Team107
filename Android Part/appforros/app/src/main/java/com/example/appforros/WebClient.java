@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 
 public class WebClient extends WebSocketClient{
     private final String MAP_MESSAGE = "map"; //地图信息
-    private final String REPLY_MESSAGE = "reply"; //机器人确认信息
+    private final String HELLO_MESSAGE = "hello"; //机器人确认信息
     private Context mContext;
     /**
      *  路径为ws+服务器地址+服务器端设置的子路径+参数（这里对应服务器端机器编号为参数）
@@ -43,7 +43,7 @@ public class WebClient extends WebSocketClient{
     @Override
     public void onMessage(String message) {
         showLog("onMessage->"+message);
-        //sendMessageBroadcast(message);
+        sendMessageBroadcast(message);
     }
 
     @Override
@@ -86,20 +86,18 @@ public class WebClient extends WebSocketClient{
      */
     private void sendMessageBroadcast(String message){
         if (!message.isEmpty()){
-            //System.out.println("webclient");
             Message msg_as_json = new Message(message);
-            //System.out.println("webclient" + msg_as_json.getType());
+            System.out.println("webclient: " + msg_as_json.getData());
             Intent intent = new Intent();
-            if (msg_as_json.getType() == REPLY_MESSAGE) {
-                //检查message类型，发送不同广播
-                intent.setAction(REPLY_MESSAGE);
-                intent.putExtra(REPLY_MESSAGE,msg_as_json.getData());
+            if (msg_as_json.getType().equals(HELLO_MESSAGE)) {
+                intent.setAction(HELLO_MESSAGE);
+                intent.putExtra(HELLO_MESSAGE,msg_as_json.getData());
             } else if (msg_as_json.getType() == MAP_MESSAGE) {
                 intent.setAction(MAP_MESSAGE);
                 intent.putExtra(MAP_MESSAGE,msg_as_json.getData());
             } else {
-                intent.setAction(REPLY_MESSAGE);
-                intent.putExtra(REPLY_MESSAGE,msg_as_json.getData());
+                intent.setAction("reply");
+                intent.putExtra(HELLO_MESSAGE,msg_as_json.getData());
             }
 
             showLog("发送收到的消息");

@@ -4,6 +4,8 @@ package com.example.appforros;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
 public class Message {
     private String from;
     private String to;
@@ -19,11 +21,15 @@ public class Message {
 
     public Message(String msg) {
         Gson gson = new Gson();
-        JsonObject obj = gson.fromJson(gson.toJson(this), JsonObject.class);
+        JsonObject obj = gson.fromJson(msg, JsonObject.class);
         from = obj.get("from").toString();
         to = obj.get("to").toString();
         type = obj.get("type").toString();
         data = obj.get("data").toString();
+        from = from.substring(1, from.length() - 1);
+        data = data.substring(1, data.length() - 1);
+        to = to.substring(1, to.length() - 1);
+        type = type.substring(1, type.length() - 1);
     }
 
     public String getFrom() {

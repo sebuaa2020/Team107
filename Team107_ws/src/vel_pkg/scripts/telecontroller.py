@@ -7,17 +7,49 @@ import sys, select, termios, tty
 
 import json
 import math
+import websocket
+
 
 try:
     import thread
 except ImportError:
     import _thread as thread
+    
+from multiprocessing import Process
 
-from websocketClient import key_list,ws
 
 msg = """
 Remote Control The Robot!
 """
+
+
+key_list = []
+
+
+def on_message(ws, message):
+    #print(ws)
+    print("reveive" + message)
+    jsonObj = json.loads(message)
+    if jsonObj['type'] == 'angle_speed':
+        key_list.append(jsonObj['data'])        
+    elif jsonObj['type'] == 'stop':
+        key_list.append('stop')
+
+
+def on_error(ws, error):
+    #print(ws)
+    print(error)
+
+
+def on_close(ws):
+    #print(ws)
+    print("### closed ###")
+
+
+ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/2",
+                            on_message=on_message,
+                            on_error=on_error,
+                            on_close=on_close)
 
 
 def getKey():
@@ -42,9 +74,6 @@ from get_camera import carama_listener
 if __name__=="__main__":
     thread.start_new_thread(ws.run_forever, ())
     
-    # thread that listens server
-    thread.start_new_thread(map_listener, ())
-    #thread.start_new_thread(carama_listener, ())
 
     settings = termios.tcgetattr(sys.stdin)
     

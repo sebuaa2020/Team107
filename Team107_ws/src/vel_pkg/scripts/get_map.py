@@ -6,11 +6,42 @@ import numpy as np
 import base64
 import PIL.Image as Image
 import io
+import websocket
 
 from nav_msgs.msg import OccupancyGrid
 import matplotlib.pyplot as plt
+import json
+try:
+    import thread
+except ImportError:
+    import _thread as thread
 
-from websocketClient import map_list,ws
+
+map_list = []
+
+def on_message(ws, message):
+    #print(ws)
+    print("reveive" + message)
+    jsonObj = json.loads(message)
+    if jsonObj['type'] == 'angle_speed':
+        map_list.append(jsonObj['data'])        
+
+
+
+def on_error(ws, error):
+    #print(ws)
+    print(error)
+
+
+def on_close(ws):
+    #print(ws)
+    print("### closed ###")
+
+
+ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/3",
+                            on_message=on_message,
+                            on_error=on_error,
+                            on_close=on_close)
 
 class Map(object):
   def __init__(self):
@@ -68,3 +99,6 @@ def map_listener():
   v=Map()
   rospy.spin()
 
+if __name__=="__main__":
+    thread.start_new_thread(ws.run_forever, ())
+    map_listener()

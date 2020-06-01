@@ -28,6 +28,7 @@ public class Robot {
     private String map;
     private final String FROM = "android";
     private final String TO = "robot";
+    private final String TO_MAP = "map";
     private final String DIRECTION = "direction";
     private final String MAP_BEGIN = "map_begin";
     private final String MAP_END =  "map_end";
@@ -113,7 +114,7 @@ public class Robot {
     /**更新地图
      */
     public void refresh_map() {
-        Message msg = new Message(FROM, TO, MAP_REFRESH, MAP_REFRESH);
+        Message msg = new Message(FROM, TO_MAP, MAP_REFRESH, MAP_REFRESH);
         sendMessage(msg);
     }
 

@@ -227,10 +227,6 @@ target_link_libraries(wpb_home_behavior_node
   ${catkin_LIBRARIES}
 )
 
-add_executable(exceptionHandler
-               src/exceptionHandler.cpp
-)
-target_link_libraries(exceptionHandler ${catkin_LIBRARIES})
 
 add_executable(navigation src/navigation_interface.cpp)
 target_link_libraries(navigation

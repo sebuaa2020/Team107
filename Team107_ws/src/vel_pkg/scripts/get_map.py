@@ -18,8 +18,9 @@ class Map(object):
       print "into callback"
       map = mapmsg.data
       map = np.array(map)
-      print map.shape
+      
       map = map.reshape((992,992))
+      print map.shape
 #     datas
       print map
       row,col = map.shape
@@ -27,10 +28,14 @@ class Map(object):
       for i in range(row):
         for j in range(col):
           if(map[i,j]==-1):
-             tem[i,j]=255
+            tem[i,j]=255
+          elif tem[i,j] == 0 :
+            tem[i,j] = 200
           else:
-             tem[i,j]=map[i,j]
+            tem[i,j]= 10
+            
 #      print map.shape
+      cv2.imwrite("1.png", tem)
       cv2.imshow("map",tem)
       cv2.waitKey(0)
 #      plt.imshow(map)
@@ -40,7 +45,7 @@ class Map(object):
       print e
       rospy.loginfo('convert rgb image error')
 
-  def getImage():
+  def getImage(self):
     return self.rgb_image
 
 def main(_):

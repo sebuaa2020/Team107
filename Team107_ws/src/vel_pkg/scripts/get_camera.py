@@ -11,7 +11,7 @@ def callback(imgmsg):
 
 
     print img
-#    cv2.imwrite("1.png", img)
+#   cv2.imwrite("1.png", img)
 #    cv2.waitKey(3)
  
 def listener():

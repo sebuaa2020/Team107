@@ -25,6 +25,7 @@ public class Robot {
     private String recvMsg = null;
     private WebClient webClient;
     private Context context;
+    private String map;
     private final String FROM = "android";
     private final String TO = "robot";
     private final String DIRECTION = "direction";
@@ -61,6 +62,14 @@ public class Robot {
 
     public String getForm_ip() {
         return form_ip;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
     }
 
     /**检查连接情况
@@ -106,13 +115,6 @@ public class Robot {
     public void refresh_map() {
         Message msg = new Message(FROM, TO, MAP_REFRESH, MAP_REFRESH);
         sendMessage(msg);
-        /**广播功能测试
-         Intent intent = new Intent();
-         intent.setAction("map");
-         intent.putExtra("map", "test");
-         System.out.println("send");
-         context.sendBroadcast(intent);
-         */
     }
 
     /**发送导航点坐标
@@ -121,37 +123,6 @@ public class Robot {
         Message msg = new Message(FROM, TO, SEND_DES, des);
         sendMessage(msg);
     }
-
-    /*
-    private String sendMessage (final String Msg){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    socket = new Socket(form_ip, 12574);
-                    //向服务器发送数据
-                    PrintWriter send = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(),"utf-8")));
-                    send.println(Msg);
-                    send.flush();
-                    //接受服务端数据
-                    BufferedReader recv = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    recvMsg = recv.readLine();
-                    if (recvMsg != null) {
-//                          mRecvText.setText(recvMsg);
-                        System.out.println(recvMsg);
-                    } else {
-//                          mRecvText.setText("Cannot receive data correctly.");
-                    }
-                    send.close();
-                    recv.close();
-                    socket.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }).start();
-        return recvMsg;
-    }*/
 
     private void sendMessage(Message msg) {
         webClient.send(msg.MessageToJson());

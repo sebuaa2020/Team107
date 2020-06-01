@@ -13,7 +13,8 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:hint="请输入帐号(任意整数)"/>
+        android:hint="请输入帐号(任意整数)"
+        android:text="107"/>
 
     <EditText
         android:id="@+id/user_password"
@@ -22,7 +23,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:hint="请输入密码(随便输)"/>
+        android:hint="请输入密码(随便输)"
+        android:text="107"/>
 
     <LinearLayout
         android:orientation="horizontal"

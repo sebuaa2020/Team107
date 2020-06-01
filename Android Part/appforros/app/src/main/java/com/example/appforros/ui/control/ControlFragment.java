@@ -86,7 +86,7 @@ public class ControlFragment extends Fragment {
     private void sendAngle(String angle) {
         if (chosed_id == -1) {
             //Toast.makeText(root.getContext(), "请连接机器人", Toast.LENGTH_SHORT).show();
-        } else if (user.check_priority("move")) {
+        } else if (!user.check_priority("move")) {
             //Toast.makeText(root.getContext(), "权限不足", Toast.LENGTH_SHORT).show();
         } else {
             robot.sendAngle(angle + " " + velocity);

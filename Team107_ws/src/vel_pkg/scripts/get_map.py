@@ -1,19 +1,24 @@
-#!/usr/bin/env python
 
+#get map
 import rospy
 import cv2
 import numpy as np
+import base64
+import PIL.Image as Image
+import io
 
 from nav_msgs.msg import OccupancyGrid
 import matplotlib.pyplot as plt
 
+from websocketClient import map_list,ws
+
 class Map(object):
   def __init__(self):
 
-    self.map_sub = rospy.Subscriber("/map",OccupancyGrid, self.callback)
+    self.map_sub = rospy.Subscriber("/map",OccupancyGrid, self.map_callback)
     print self.map_sub
 
-  def callback(self,mapmsg):
+  def map_callback(self,mapmsg):
     try:
       print "into callback"
       map = mapmsg.data
@@ -33,11 +38,23 @@ class Map(object):
             tem[i,j] = 200
           else:
             tem[i,j]= 10
-            
+      
+      
+      if len(map_list) != 0:
+        map_list.pop()
+        img = Image.fromarray(np.uint8(tem))
+        imgByteArr = io.BytesIO()
+        img.save(imgByteArr, format='PNG')
+        imgByteArr = imgByteArr.getvalue()
+
+        strEncode = base64.b64encode(imgByteArr)
+        s = '{"to":"android","from":"robot","type":"map","data":"'+strEncode+'"}'
+        ws.send(s)
+          
 #      print map.shape
-      cv2.imwrite("1.png", tem)
-      cv2.imshow("map",tem)
-      cv2.waitKey(0)
+#      cv2.imwrite("1.png", tem)
+#      cv2.imshow("map",tem)
+#      cv2.waitKey(0)
 #      plt.imshow(map)
 #      plt.show()
     
@@ -45,13 +62,9 @@ class Map(object):
       print e
       rospy.loginfo('convert rgb image error')
 
-  def getImage(self):
-    return self.rgb_image
 
-def main(_):
+def map_listener():
   rospy.init_node('map',anonymous=True)
   v=Map()
   rospy.spin()
 
-if __name__=='__main__':
-  main('_')

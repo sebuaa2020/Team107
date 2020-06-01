@@ -4,7 +4,7 @@ import rospy
 from geometry_msgs.msg import Twist
 
 import sys, select, termios, tty
-import websocket
+
 import json
 import math
 
@@ -13,40 +13,7 @@ try:
 except ImportError:
     import _thread as thread
 
-
-
-key_list = []
-map_list = []
-
-def on_message(ws, message):
-    #print(ws)
-    print("reveive" + message)
-    jsonObj = json.loads(message)
-    if jsonObj['type'] == 'angle_speed':
-        key_list.append(jsonObj['data'])        
-    elif jsonObj['type'] == 'stop':
-        key_list.append('stop')
-    elif jsonObj['type'] == 'map_refresh':
-        map_list.append('refresh')
-
-def on_error(ws, error):
-    #print(ws)
-    print(error)
-
-
-def on_close(ws):
-    #print(ws)
-    print("### closed ###")
-
-
-ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/2",
-                            on_message=on_message,
-                            on_error=on_error,
-                            on_close=on_close)
-
-
-thread.start_new_thread(ws.run_forever, ())
-
+from websocketClient import key_list,ws
 
 msg = """
 Remote Control The Robot!
@@ -68,7 +35,17 @@ turn = 1
 def vels(speed,turn):
     return "currently:\tspeed %s\tturn %s " % (speed,turn)
 
+
+from get_map import map_listener
+from get_camera import carama_listener
+
 if __name__=="__main__":
+    thread.start_new_thread(ws.run_forever, ())
+    
+    # thread that listens server
+    thread.start_new_thread(map_listener, ())
+    #thread.start_new_thread(carama_listener, ())
+
     settings = termios.tcgetattr(sys.stdin)
     
     rospy.init_node('robot_teleop')

@@ -87,7 +87,7 @@ public class WebClient extends WebSocketClient{
     private void sendMessageBroadcast(String message){
         if (!message.isEmpty()){
             Message msg_as_json = new Message(message);
-            System.out.println("webclient: " + msg_as_json.getData());
+            System.out.println("webclient: " + msg_as_json.getType());
             Intent intent = new Intent();
             if (msg_as_json.getType().equals(HELLO_MESSAGE)) {
                 intent.setAction(HELLO_MESSAGE);

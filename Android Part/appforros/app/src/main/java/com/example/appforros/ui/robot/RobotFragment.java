@@ -99,8 +99,7 @@ public class RobotFragment extends Fragment {
         for (int i = 0; i < 4; i++) {
             ip_true = ip_true*256 + ip_part[i];
         }
-        //Snackbar.make(root, ip_part[0] + "   " + ip_part[1] + "   " + ip_part[2] + "   " + ip_part[3], Snackbar.LENGTH_SHORT).show();
-        //Snackbar.make(root, ip_true + "   ", Snackbar.LENGTH_LONG).show();
+
         return ip_true;
     }
 

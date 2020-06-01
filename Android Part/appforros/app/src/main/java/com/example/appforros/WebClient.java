@@ -96,8 +96,8 @@ public class WebClient extends WebSocketClient{
                 intent.setAction(MAP_MESSAGE);
                 intent.putExtra(MAP_MESSAGE,msg_as_json.getData());
             } else {
-                intent.setAction("reply");
-                intent.putExtra(HELLO_MESSAGE,msg_as_json.getData());
+                intent.setAction("other");
+                intent.putExtra("other",msg_as_json.getData());
             }
 
             showLog("发送收到的消息");

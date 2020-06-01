@@ -10,6 +10,8 @@ public class MessageReceiveHandle {
     private Gson gson = new Gson();
     private static HashMap<String,Integer> addressMap = new HashMap<String,Integer>();
     public MessageReceiveHandle(){
+        addressMap.put("camera",4);
+        addressMap.put("map",3);
         addressMap.put("robot",2);
         addressMap.put("android",1);
         addressMap.put("server",0);

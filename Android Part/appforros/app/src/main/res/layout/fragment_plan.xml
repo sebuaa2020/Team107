@@ -17,14 +17,34 @@
             android:text="更新地图"
             />
         <View
-            android:layout_width="30dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"/>
-        <EditText
-            android:id="@+id/destination"
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="请输入坐标"
+            android:text="("/>
+        <EditText
+            android:id="@+id/des_x"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="x"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=","/>
+        <EditText
+            android:id="@+id/des_y"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="y"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")"/>
         <Button
             android:id="@+id/send_des"
             android:layout_width="wrap_content"
@@ -34,11 +54,26 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/map"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/robot_location"
+            android:scaleType="centerInside"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher"
+            />
+
+    </FrameLayout>
 
 
 </LinearLayout>

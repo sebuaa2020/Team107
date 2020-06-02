@@ -16,14 +16,16 @@ try:
 except ImportError:
     import _thread as thread
 
-
+ws = []
 cur_map = []
 
 def on_message(ws, message):
     #print(ws)
     print("reveive" + message)
     jsonObj = json.loads(message)
+    
     if jsonObj['type'] == 'map_refresh':
+      
       img = Image.fromarray(np.uint8(cur_map))
       img = img.transpose(Image.FLIP_LEFT_RIGHT)
       imgByteArr = io.BytesIO()
@@ -31,7 +33,8 @@ def on_message(ws, message):
       imgByteArr = imgByteArr.getvalue()
 
       strEncode = base64.b64encode(imgByteArr)
-      s = '{"to":"android","from":"robot","type":"map","data":"'+strEncode+'"}'
+      #print(strEncode)
+      s = '{"to":"android","from":"map","type":"map","data":"'+strEncode+'"}'
       ws.send(s)
       print('send map')
 
@@ -46,11 +49,11 @@ def on_close(ws):
     #print(ws)
     print("### closed ###")
 
-
 ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/3",
                             on_message=on_message,
                             on_error=on_error,
                             on_close=on_close)
+
 
 class Map(object):
   def __init__(self):
@@ -78,6 +81,7 @@ class Map(object):
             tem[i,j] = 200
           else:
             tem[i,j]= 10
+      global cur_map
       cur_map = tem
       '''
       if len(map_list) != 0:
@@ -110,5 +114,5 @@ def map_listener():
   rospy.spin()
 
 if __name__=="__main__":
-    #thread.start_new_thread(ws.run_forever, ())
+    thread.start_new_thread(ws.run_forever, ())
     map_listener()

@@ -17,14 +17,23 @@ except ImportError:
     import _thread as thread
 
 
-map_list = []
+cur_map = []
 
 def on_message(ws, message):
     #print(ws)
     print("reveive" + message)
     jsonObj = json.loads(message)
     if jsonObj['type'] == 'map_refresh':
-        map_list.append(jsonObj['data'])        
+      img = Image.fromarray(np.uint8(cur_map))
+      img = img.transpose(Image.FLIP_LEFT_RIGHT)
+      imgByteArr = io.BytesIO()
+      img.save(imgByteArr, format='PNG')
+      imgByteArr = imgByteArr.getvalue()
+
+      strEncode = base64.b64encode(imgByteArr)
+      s = '{"to":"android","from":"robot","type":"map","data":"'+strEncode+'"}'
+      ws.send(s)
+      print('send map')
 
 
 
@@ -69,7 +78,7 @@ class Map(object):
             tem[i,j] = 200
           else:
             tem[i,j]= 10
-      
+      cur_map = tem
       '''
       if len(map_list) != 0:
         map_list.pop()

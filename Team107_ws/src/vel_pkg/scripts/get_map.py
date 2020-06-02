@@ -32,7 +32,7 @@ def on_message(ws, message):
       map = map.reshape((992,992))
       print map.shape
 #     datas
-      print map
+#      print map
       row,col = map.shape
       tem = np.zeros((row,col))
       for i in range(row):
@@ -43,8 +43,6 @@ def on_message(ws, message):
             tem[i,j] = 200
           else:
             tem[i,j]= 10
-    elif jsonObj['type'] == 'send_des':
-      os.system('gnome-terminal -x rosrun vel_pkg navigation '+jsonObj['data'])
 
       img = Image.fromarray(np.uint8(tem))
       img = img.transpose(Image.FLIP_LEFT_RIGHT)
@@ -57,6 +55,9 @@ def on_message(ws, message):
       s = '{"to":"android","from":"map","type":"map","data":"'+strEncode+'"}'
       ws.send(s)
       print('send map')
+    elif jsonObj['type'] == 'send_des':
+      os.system('gnome-terminal -x rosrun vel_pkg navigation '+jsonObj['data'])
+
 
 
 

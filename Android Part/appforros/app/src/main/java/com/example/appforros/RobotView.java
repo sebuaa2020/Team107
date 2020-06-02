@@ -31,7 +31,7 @@ public class RobotView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Paint paint = new Paint();
-        Bitmap bitmap = Bitmap.createBitmap(5,5,Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(20,20,Bitmap.Config.ARGB_8888);
         bitmap.eraseColor(Color.parseColor("#ff0000"));
         canvas.drawBitmap(bitmap, bitmapX, bitmapY, paint);
         System.out.println("bitmap" + bitmap.toString());

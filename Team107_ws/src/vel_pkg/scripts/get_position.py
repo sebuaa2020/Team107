@@ -27,13 +27,16 @@ ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/5",
                             on_message=on_message,
                             on_error=on_error,
                             on_close=on_close)
-data = ""
+x = 0.0
+y = 0.0
 def PoseCallBack(msg):
 	#订阅到的坐标信息
+    global x,y
+
     x = msg.pose.pose.position.x
     y = msg.pose.pose.position.y
-    global data
-    data = str(x)+' '+str(y)
+    x = x * -1.68
+    y = -1.73*(y+10.5)
 
 def PoseSub():
 	rospy.init_node('pose_sub',anonymous=False)
@@ -45,11 +48,14 @@ def PoseSub():
 
 def on_open(ws):
     def run(*args):
-        global data
+
         while True:
             time.sleep(0.2)
-            print(data)
-            s = '{"to":"android","from":"pos","type":"receive_des","data":"'+data+'"}'
+            #print(data) 
+            global x,y
+            
+            s = '{"to":"android","from":"robot","type":"receive_des","data":"'+str(x)+" "+str(y)+'"}'
+            print(s)
             ws.send(s)
     thread.start_new_thread(run, ())
 

@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 #get map
 import rospy
 import cv2
@@ -23,7 +23,7 @@ def on_message(ws, message):
     #print(ws)
     print("reveive" + message)
     jsonObj = json.loads(message)
-    if jsonObj['type'] == 'angle_speed':
+    if jsonObj['type'] == 'map_refresh':
         map_list.append(jsonObj['data'])        
 
 
@@ -70,7 +70,7 @@ class Map(object):
           else:
             tem[i,j]= 10
       
-      
+      '''
       if len(map_list) != 0:
         map_list.pop()
         img = Image.fromarray(np.uint8(tem))
@@ -81,7 +81,8 @@ class Map(object):
         strEncode = base64.b64encode(imgByteArr)
         s = '{"to":"android","from":"robot","type":"map","data":"'+strEncode+'"}'
         ws.send(s)
-          
+        print('send map')
+      '''
 #      print map.shape
 #      cv2.imwrite("1.png", tem)
 #      cv2.imshow("map",tem)
@@ -100,5 +101,5 @@ def map_listener():
   rospy.spin()
 
 if __name__=="__main__":
-    thread.start_new_thread(ws.run_forever, ())
+    #thread.start_new_thread(ws.run_forever, ())
     map_listener()

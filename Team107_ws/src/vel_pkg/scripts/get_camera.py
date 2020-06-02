@@ -15,9 +15,18 @@ try:
 except ImportError:
     import _thread as thread
 
+
+strEncode = ""
+oldStrEncode = ""
+
 def on_message(ws, message):
     #print(ws)
-    print("reveive" + message)
+    print(message)
+    global oldStrEncode
+    if strEncode != oldStrEncode:
+        s = '{"to":"android","from":"camera","type":"receive_camera","data":"'+strEncode+'"}'
+        oldStrEncode = strEncode
+        ws.send(s)
 
 
 def on_error(ws, error):
@@ -34,8 +43,7 @@ ws = websocket.WebSocketApp("ws://134.175.14.15:8080/demo/websocket/4",
                             on_error=on_error,
                             on_close=on_close)
 
-strEncode = ""
-oldStrEncode = ""
+
 def carama_callback(imgmsg):
     bridge = CvBridge()
     img = bridge.imgmsg_to_cv2(imgmsg, "bgr8")
@@ -52,7 +60,7 @@ def carama_callback(imgmsg):
     global strEncode
     strEncode = base64.b64encode(imgByteArr)
 
-    print(strEncode)
+    #print(strEncode)
     
     rospy.sleep(10.)
 #   add code here
@@ -71,20 +79,7 @@ def carama_listener():
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
-def on_open(ws):
-    def run(*args):
-        global oldStrEncode
-        global strEncode
-        while True:
-            time.sleep(5)
-            #print('send')
-            if strEncode != oldStrEncode:
-                s = '{"to":"android","from":"camera","type":"receive_camera","data":"'+strEncode+'"}'
-                oldStrEncode = strEncode
-                ws.send(s)
-    thread.start_new_thread(run, ())
 
 if __name__ == '__main__':
-    ws.on_open = on_open
     thread.start_new_thread(ws.run_forever, ())
     carama_listener()

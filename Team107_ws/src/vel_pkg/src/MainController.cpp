@@ -66,7 +66,7 @@ void gmapping(){
 
 void save_map(){
     int ret;
-    ret = system("rosrun map_server map_saver -f  ~/Team107/Team107_ws/src/vel_pkg/maps/map");
+    ret = system("rosrun map_server map_saver -f  ~/Desktop/map");
     if (ret != -1 || ret != 127) {
         cout << "map saved" << endl;
     } else {
@@ -119,10 +119,6 @@ int main() {
             set_navi_point(x,y);
         }
         else if (flag ==4) {
-            if(!keyboard_controll_start) {
-                cout << "use gmapping we need keyboard_controller first" << endl;
-            }
-            else
                 gmapping();
         }
         else if(flag == 5) {

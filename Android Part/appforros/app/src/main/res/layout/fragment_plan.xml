@@ -67,12 +67,9 @@
 
         <ImageView
             android:id="@+id/robot_location"
-            android:scaleType="centerInside"
             android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_launcher"
-            />
+            android:layout_height="5dp"/>
+<!--            android:src="@mipmap/ic_launcher"-->
 
     </FrameLayout>
 

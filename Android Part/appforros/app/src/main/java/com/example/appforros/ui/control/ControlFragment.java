@@ -1,11 +1,19 @@
 package com.example.appforros.ui.control;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +25,7 @@ import com.example.appforros.R;
 import com.example.appforros.Robot;
 import com.example.appforros.RobotList;
 import com.example.appforros.User;
+import com.example.appforros.ui.plan.PlanFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.kongqw.rockerlibrary.view.RockerView;
 
@@ -27,6 +36,8 @@ public class ControlFragment extends Fragment {
     private Robot robot = null;
     private double velocity = 0.5;
     private User user = User.getInstance();
+    private final String REVEIVE_CAMERA = "receive_camera";
+    private ImageView camera;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +45,7 @@ public class ControlFragment extends Fragment {
         final SeekBar velocitySeekBar = root.findViewById(R.id.velocity);
         final TextView v_value = root.findViewById(R.id.v_value);
         chosed_id = robotList.getChosed_id();
+        camera = root.findViewById(R.id.camera);
         if (chosed_id != -1) {
             robot = robotList.getChosed_robot();
         }
@@ -80,6 +92,12 @@ public class ControlFragment extends Fragment {
             }
         });
 
+        doRegisterReceiver();
+
+        if (robot != null && robot.getMap() != null) {
+            camera.setImageBitmap(stringToBitmap(robot.getCamera()));
+        }
+
         return root;
     }
 
@@ -101,6 +119,38 @@ public class ControlFragment extends Fragment {
         } else {
             robot.sendStop();
         }
+    }
+
+    private class ChatMessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message=intent.getStringExtra(REVEIVE_CAMERA);
+            camera.setImageBitmap(stringToBitmap(message));
+        }
+    }
+
+
+    /**
+     * 动态注册广播
+     */
+    private void doRegisterReceiver() {
+        ChatMessageReceiver chatMessageReceiver = new ChatMessageReceiver();
+        IntentFilter filter = new IntentFilter(REVEIVE_CAMERA);
+        root.getContext().registerReceiver(chatMessageReceiver, filter);
+    }
+
+    private Bitmap stringToBitmap(String string) {
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //System.out.println("bitmap " + Integer.toHexString(bitmap.getPixel(496, 496)));
+
+        return bitmap;
     }
 
 }

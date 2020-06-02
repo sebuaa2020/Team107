@@ -9,9 +9,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -39,6 +41,7 @@ public class PlanFragment extends Fragment {
     private final String MAP_MESSAGE = "map";
     private final String RECEIVE_DES = "receive_des";
     private User user = User.getInstance();
+    private FrameLayout map_frame;
     private ImageView robot_location;
     private FrameLayout.LayoutParams robot_margin;
     private int map_width = 992;
@@ -55,6 +58,7 @@ public class PlanFragment extends Fragment {
         final EditText des_x = root.findViewById(R.id.des_x);
         final EditText des_y = root.findViewById(R.id.des_y);
         map_view = root.findViewById(R.id.map);
+        map_frame = root.findViewById(R.id.map_frame);
         robot_location = root.findViewById(R.id.robot_location);
         robot_margin = (FrameLayout.LayoutParams) robot_location.getLayoutParams();
 
@@ -96,8 +100,8 @@ public class PlanFragment extends Fragment {
                 } else {
                     if (checkDes(des)) {
                         robot.send_des(des);
-                        //setRobotLocation(des);
-                        //robot.setDes(des);
+                        setRobotLocation(des);
+                        robot.setDes(des);
                         Snackbar.make(v, "发送地址 " + des, Snackbar.LENGTH_SHORT).show();
                     } else {
                         Snackbar.make(v, "地址错误", Snackbar.LENGTH_SHORT).show();
@@ -180,12 +184,12 @@ public class PlanFragment extends Fragment {
         if (des != "") {
             x = Double.valueOf(des.split(" ")[0]);
             y = Double.valueOf(des.split(" ")[1]);
-            left = 160 + (int) x*20*320/map_width;
-            top = 160 - (int) y*20*320/map_height;
+            left = 540 + (int) x*20*1080/map_width;
+            top = 540 - (int) y*20*1080/map_height;
         }
         System.out.println("des--- " + x + " " + y);
         System.out.println("des--- " + left + " " + top);
         robot_margin.setMargins(left, top, 0, 0);
-
+        robot_location.refreshDrawableState();
     }
 }

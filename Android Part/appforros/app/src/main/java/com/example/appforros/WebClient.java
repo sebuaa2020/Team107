@@ -15,6 +15,7 @@ public class WebClient extends WebSocketClient{
     private final String MAP_MESSAGE = "map"; //地图信息
     private final String HELLO_MESSAGE = "hello"; //机器人确认信息
     private final String RECEIVE_DES = "receive_des";
+    private final String RECEIVE_CAMERA = "receive_des";
     private Context mContext;
     private RobotList robotList = RobotList.getInstance();
     private Robot robot;
@@ -111,6 +112,14 @@ public class WebClient extends WebSocketClient{
                     robot = robotList.getChosed_robot();
                     //System.out.println("webclient image");
                     robot.setDes(msg_as_json.getData());
+                }
+            } else if (msg_as_json.getType().equals(RECEIVE_CAMERA)) {
+                intent.setAction(RECEIVE_CAMERA);
+                intent.putExtra(RECEIVE_CAMERA, msg_as_json.getData());
+                if (robotList.getChosed_id() != -1) {
+                    robot = robotList.getChosed_robot();
+                    //System.out.println("webclient image");
+                    robot.setCamera(msg_as_json.getData());
                 }
             } else {
                 intent.setAction("other");

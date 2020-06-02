@@ -15,7 +15,7 @@ public class WebClient extends WebSocketClient{
     private final String MAP_MESSAGE = "map"; //地图信息
     private final String HELLO_MESSAGE = "hello"; //机器人确认信息
     private final String RECEIVE_DES = "receive_des";
-    private final String RECEIVE_CAMERA = "receive_des";
+    private final String RECEIVE_CAMERA = "receive_camera";
     private Context mContext;
     private RobotList robotList = RobotList.getInstance();
     private Robot robot;

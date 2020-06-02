@@ -26,8 +26,7 @@ def on_message(ws, message):
         key_list.append(jsonObj['data'])        
     elif jsonObj['type'] == 'stop':
         key_list.append('stop')
-    elif jsonObj['type'] == 'map_refresh':
-        map_list.append('refresh')
+
 
 def on_error(ws, error):
     #print(ws)

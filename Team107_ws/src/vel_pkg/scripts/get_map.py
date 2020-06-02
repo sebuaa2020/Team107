@@ -7,6 +7,7 @@ import base64
 import PIL.Image as Image
 import io
 import websocket
+import os
 
 from nav_msgs.msg import OccupancyGrid
 import matplotlib.pyplot as plt
@@ -25,15 +26,34 @@ def on_message(ws, message):
     jsonObj = json.loads(message)
     
     if jsonObj['type'] == 'map_refresh':
+      map = cur_map.data
+      map = np.array(map)
       
-      img = Image.fromarray(np.uint8(cur_map))
+      map = map.reshape((992,992))
+      print map.shape
+#     datas
+      print map
+      row,col = map.shape
+      tem = np.zeros((row,col))
+      for i in range(row):
+        for j in range(col):
+          if(map[i,j]==-1):
+            tem[i,j]=255
+          elif tem[i,j] == 0 :
+            tem[i,j] = 200
+          else:
+            tem[i,j]= 10
+    elif jsonObj['type'] == 'send_des':
+      os.system('gnome-terminal -x rosrun vel_pkg navigation '+jsonObj['data'])
+
+      img = Image.fromarray(np.uint8(tem))
       img = img.transpose(Image.FLIP_LEFT_RIGHT)
       imgByteArr = io.BytesIO()
       img.save(imgByteArr, format='PNG')
       imgByteArr = imgByteArr.getvalue()
-
+      
       strEncode = base64.b64encode(imgByteArr)
-      #print(strEncode)
+      
       s = '{"to":"android","from":"map","type":"map","data":"'+strEncode+'"}'
       ws.send(s)
       print('send map')
@@ -64,25 +84,9 @@ class Map(object):
   def map_callback(self,mapmsg):
     try:
       print "into callback"
-      map = mapmsg.data
-      map = np.array(map)
       
-      map = map.reshape((992,992))
-      print map.shape
-#     datas
-      print map
-      row,col = map.shape
-      tem = np.zeros((row,col))
-      for i in range(row):
-        for j in range(col):
-          if(map[i,j]==-1):
-            tem[i,j]=255
-          elif tem[i,j] == 0 :
-            tem[i,j] = 200
-          else:
-            tem[i,j]= 10
       global cur_map
-      cur_map = tem
+      cur_map = mapmsg
       '''
       if len(map_list) != 0:
         map_list.pop()

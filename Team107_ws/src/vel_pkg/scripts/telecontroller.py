@@ -8,7 +8,7 @@ import sys, select, termios, tty
 import json
 import math
 import websocket
-
+import os
 
 try:
     import thread
@@ -34,7 +34,6 @@ def on_message(ws, message):
         key_list.append(jsonObj['data'])        
     elif jsonObj['type'] == 'stop':
         key_list.append('stop')
-
 
 def on_error(ws, error):
     #print(ws)

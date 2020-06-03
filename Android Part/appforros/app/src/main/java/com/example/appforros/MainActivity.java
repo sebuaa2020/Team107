@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "注册", Snackbar.LENGTH_SHORT).show();
+                //Snackbar.make(v, "注册", Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     user_account.setText("");
                     user_password.setText("");
                     Intent intent = new Intent(MainActivity.this, SelectActivity.class);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
 

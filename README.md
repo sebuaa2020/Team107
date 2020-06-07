@@ -40,7 +40,11 @@
 | 服务器   | Spring, Tomcat           |
 | 安卓     | Android Studio           |
 
+## 各部分详细说明
 
+[Android部分说明文档](./Android%20Part/README.md)
+
+[服务器端说明文档](./server/README.md)
 
 ## 项目开发文档(SDP)
 

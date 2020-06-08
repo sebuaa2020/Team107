@@ -1,5 +1,5 @@
 ﻿# 北航计算机学院软件工程2020年设计文档
- ![](https://img.shields.io/badge/license-MIT-Green.svg)
+ ![](https://img.shields.io/badge/build-passing-brightgreen)![](https://img.shields.io/badge/license-MIT-Green.svg)![](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey)
 
 ## 项目介绍
 

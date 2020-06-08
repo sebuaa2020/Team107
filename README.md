@@ -46,6 +46,8 @@
 
 [服务器端说明文档](./server/README.md)
 
+[机器人端说明文档](./Team107_ws/README.md)
+
 ## 项目开发文档(SDP)
 
 负责编制人: 杨嘉成

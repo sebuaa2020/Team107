@@ -50,6 +50,24 @@
 
 [网页端说明文档](./web/README.md)
 
+## 目录结构
+
+目录结构
+
+```text
+/Android Part        #安卓客户端部分
+    /appforros       #安卓源码
+/Team107_ws          #ros机器人部分
+    /src             #ros源码
+/server
+    /src             #服务器端源码
+    /serverWebSocketClientTest   #测试文件
+/web
+    /src             #网页部分源码
+/videos              #集成测试视频
+/doc                 #文档目录
+```
+
 ## 项目开发文档(SDP)
 
 负责编制人: 杨嘉成

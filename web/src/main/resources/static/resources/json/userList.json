@@ -1,0 +1,34 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 3,
+  "data": [
+    {
+      "usersId": "1",
+      "userName": "user1",
+      "userEmail": "mage@buaa.edu.cn",
+      "userSex": "男",
+      "userStatus": "0",
+      "userEndTime": "2018-01-31 10:00",
+      "userDesc": "sth"
+    },
+    {
+      "usersId": "2",
+      "userName": "user2",
+      "userEmail": "user2@buaa.edu.cn",
+      "userSex": "保密",
+      "userStatus": "0",
+      "userEndTime": "2018-01-14 15:35",
+      "userDesc": "性别至今是个谜。。。"
+    },
+    {
+      "usersId": "3",
+      "userName": "纸飞机",
+      "userEmail": "fly@buaa.edu.cn",
+      "userSex": "男",
+      "userStatus": "1",
+      "userEndTime": "2018-01-25 16:25",
+      "userDesc": "帐号被封。"
+    }
+  ]
+}

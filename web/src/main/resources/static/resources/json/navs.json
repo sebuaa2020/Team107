@@ -1,0 +1,35 @@
+{
+  "memberCenter": [
+    {
+      "title": "用户中心",
+      "icon": "&#xe612;",
+      "href": "page/user/userList.html",
+      "spread": false
+    }
+  ],
+  "systemeSttings": [
+    
+    {
+      "title": "机器人控制",
+      "icon": "icon-log",
+      "href": "page/systemSetting/control.html",
+      "spread": false
+    },
+    {
+      "title": "机器人管理",
+      "icon": "&#xe857;",
+      "href": "page/systemSetting/robotList.html",
+      "spread": false
+    }
+  ],
+  "seraphApi": [
+    {
+      "title": "项目概述",
+      "icon": "icon-mokuai",
+      "href": "page/doc/doc.html",
+      "spread": false
+    }
+  ]
+}
+
+
